@@ -45,7 +45,9 @@ pub fn (l Layout) to_map() map[string]json.Any {
 
 	// Set fields if they have values
 	if l.title != '' {
-		layout_map['title'] = json.Any(l.title)
+		layout_map['title'] = json.Any({
+			'text': json.Any(l.title)
+		})
 	}
 
 	layout_map['showlegend'] = json.Any(l.showlegend)
@@ -106,7 +108,9 @@ pub fn (mut l Layout) set_title(title string) {
 pub fn (mut l Layout) set_axis_title(axis string, title string) {
 	if axis == 'x' {
 		if 'title' !in l.xaxis {
-			l.xaxis['title'] = json.Any(title)
+			l.xaxis['title'] = json.Any({
+				'text': json.Any(title)
+			})
 		} else {
 			mut title_map := (l.xaxis['title'] or {
 				map[string]json.Any{}
@@ -116,7 +120,9 @@ pub fn (mut l Layout) set_axis_title(axis string, title string) {
 		}
 	} else if axis == 'y' {
 		if 'title' !in l.yaxis {
-			l.yaxis['title'] = json.Any(title)
+			l.yaxis['title'] = json.Any({
+				'text': json.Any(title)
+			})
 		} else {
 			mut title_map := (l.yaxis['title'] or {
 				map[string]json.Any{}
